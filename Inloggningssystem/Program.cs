@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System.ComponentModel;
-
+using System.Drawing;
+using static System.Console;
 
 namespace Inloggningssystem
 {
@@ -20,13 +21,21 @@ namespace Inloggningssystem
             while (running)
             {
                 Console.Clear();
-                Console.WriteLine("Välkommen till inloggningssidan!");
-                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("╔══════════════════════════════════════╗");
+                Console.WriteLine("║   Välkommen till inloggningssidan    ║");
+                Console.WriteLine("╚══════════════════════════════════════╝");
+                ResetColor();
+                WriteLine();
                 Console.WriteLine("Välj en åtgärd:");
-                Console.WriteLine("1. Sign in");
-                Console.WriteLine("2. Log in");
+
+                Console.ForegroundColor = ConsoleColor.Green;
+
+                Console.WriteLine("\n1. Skapa konto");
+                Console.WriteLine("2. Logga in");
                 Console.WriteLine("3. Avsluta programmet");
-                Console.WriteLine($"{userName.Length}");
+                ResetColor();
+
                 string choice = Console.ReadLine();
 
                 switch (choice)
@@ -65,7 +74,11 @@ namespace Inloggningssystem
             {
                 Console.Clear();
                 Console.Write("Ange ett användarnamn: ");
+
+                Console.ForegroundColor = ConsoleColor.White;
                 string newUserName = Console.ReadLine();
+                ResetColor();
+
                 bool finns = false;
                 for (int i = 0; i < userCount; i++)
                 {
@@ -82,9 +95,17 @@ namespace Inloggningssystem
                     Console.ReadKey();
                     continue;
                 }
-                Console.Write("Ange ett lösenord: ");
-                string newPassWord = Console.ReadLine();
 
+                Console.Write("Ange ett lösenord: ");
+
+                Console.ForegroundColor = ConsoleColor.White;
+                string newPassWord = Console.ReadLine();
+                ResetColor();
+                if(newPassWord.Length < 6)
+                {
+                    Console.WriteLine("Kort pass try again");
+                    
+                }
                 userName[userCount] = newUserName;
                 passWord[userCount] = newPassWord;
                 userCount++;
@@ -105,34 +126,45 @@ namespace Inloggningssystem
 
         static void LogIn()
         {
-               Console.Clear();
+            bool LoggedIn = false;
+
+            while (!LoggedIn)
+            {
+                Console.Clear();
                 Console.Write("Användarnamn: ");
                 string typeUsername = Console.ReadLine();
                 Console.Write("Lösenord: ");
                 string typePassword = Console.ReadLine();
 
                 bool hittad = false;
-                
+
                 for (int i = 0; i < userCount; i++)
                 {
-                    
+
                     if (typeUsername == userName[i] && typePassword == passWord[i])
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("you are logged in");
-                        Console.WriteLine($"Hello {userName[i]}");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($"\nHello {userName[i]}");
                         Console.ReadKey();
-                        hittad = true;                
+                        hittad = true;
+                        LoggedIn = true;
                         break;
                     }
-                 }
+
+                }
                 if (!hittad)
                 {
                     Console.Clear();
                     Console.WriteLine("Fel användarnamn och lösenord, Försök igen!");
+                    
                     Console.ReadKey();
 
                 }
+            }
+                
 
         }
     }
