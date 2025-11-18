@@ -103,8 +103,9 @@ namespace Inloggningssystem
                 ResetColor();
                 if(newPassWord.Length < 6)
                 {
-                    Console.WriteLine("Kort pass try again");
-                    
+                    Console.WriteLine("Lösenordet måste vara minst 6 tecken långt.försök igen.");
+                    ReadKey();
+                    continue;
                 }
                 userName[userCount] = newUserName;
                 passWord[userCount] = newPassWord;
