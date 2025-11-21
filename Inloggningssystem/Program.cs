@@ -82,9 +82,9 @@ namespace Inloggningssystem
                 bool finns = false;
                 for (int i = 0; i < userCount; i++)
                 {
-                    if (newUserName == userName[i])
-                    {
-                        
+                    if (newUserName.ToLower() == userName[i].ToLower())
+                    {                                              //Så To.Lower här gör att Man kan inte skapa en account med tillex
+                                                                   //Ninos och sen en annan account med NINOS 
                         finns = true;
                     }
 
@@ -101,9 +101,11 @@ namespace Inloggningssystem
                 Console.ForegroundColor = ConsoleColor.White;
                 string newPassWord = Console.ReadLine();
                 ResetColor();
-                if(newPassWord.Length < 6)
+                if(newPassWord.Length < 6) //lite extra just for fun
                 {
-                    Console.WriteLine("Lösenordet måste vara minst 6 tecken långt.försök igen.");
+                    ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nLösenordet måste vara minst 6 tecken långt.försök igen.");
+                    ResetColor();
                     ReadKey();
                     continue;
                 }
@@ -117,7 +119,7 @@ namespace Inloggningssystem
                 Console.WriteLine($"Ditt användarnamn är: {newUserName}");
                 Console.WriteLine($"Ditt lösenord är: {newPassWord}");
                 Console.WriteLine();
-                Console.WriteLine("Gå tillbaka till huvudmenyn för att logga in.");
+                Console.WriteLine("klick Enter för att Gå tillbaka till huvudmenyn för att logga in.");
                 Console.ReadKey();
                 skapa = false;
             }
@@ -159,7 +161,7 @@ namespace Inloggningssystem
                 if (!hittad)
                 {
                     Console.Clear();
-                    Console.WriteLine("Fel användarnamn och lösenord, Försök igen!");
+                    Console.WriteLine("Fel användarnamn eller lösenord, Försök igen!");
                     
                     Console.ReadKey();
 
