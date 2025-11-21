@@ -154,6 +154,8 @@ namespace Inloggningssystem
                         Console.ReadKey();
                         hittad = true;
                         LoggedIn = true;
+                        running = false; //when logged in then stop the whole program from running.
+                                         //should delete if later want to continue running after logged in
                         break;
                     }
 
